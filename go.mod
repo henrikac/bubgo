@@ -1,3 +1,3 @@
-module github.com/henrikac/bubs-go
+module github.com/henrikac/bubgo
 
 go 1.16
