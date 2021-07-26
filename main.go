@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 )
 
 var chars = map[rune]rune{
@@ -70,7 +71,11 @@ var chars = map[rune]rune{
 }
 
 func main() {
-	str := "Hello World"
+	if len(os.Args) < 2 {
+		fmt.Println("Usage: bubgo \"your text here\"")
+		os.Exit(1)
+	}
+	str := os.Args[1]
 	for _, c := range str {
 		if char, found := chars[c]; found {
 			fmt.Printf("%c", char)
