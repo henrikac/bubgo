@@ -1,14 +1,21 @@
-# bubs-go
+# ⓑⓤⓑⓖⓞ
 
-TODO: Write description here
+ⓑⓤⓑⓖⓞ is inspired from [bubs](https://github.com/holman/bubs) and converted to Go.
 
-## Usage
+## ⒾⓃⓈⓉⒶⓁⓁ
 
-TODO: Write usage instructions here
+`go get github.com/henrikac/bubgo`
+
+## ⓊⓈⒶⒼⒺ
+
+```terminal
+bubgo BUBGO IS THE BEST
+ⒷⓊⒷⒼⓄ ⒾⓈ ⓉⒽⒺ ⒷⒺⓈⓉ
+```
 
 ## Contributing
 
-1. Fork it (<https://github.com/henrikac/bubs-go/fork>)
+1. Fork it (<https://github.com/henrikac/bubgo/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
