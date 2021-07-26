@@ -1,6 +1,6 @@
-# ⓑⓤⓑⓖⓞ
+# ⒷⓊⒷⒼⓄ
 
-ⓑⓤⓑⓖⓞ is inspired from [bubs](https://github.com/holman/bubs) and converted to Go.
+ⒷⓊⒷⒼⓄ is inspired by [bubs](https://github.com/holman/bubs) and converted to Go.
 
 ## ⒾⓃⓈⓉⒶⓁⓁ
 
