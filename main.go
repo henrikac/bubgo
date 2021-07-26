@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 var chars = map[rune]rune{
@@ -75,7 +76,7 @@ func main() {
 		fmt.Println("Usage: bubgo \"your text here\"")
 		os.Exit(1)
 	}
-	str := os.Args[1]
+	str := strings.Join(os.Args[1:], " ")
 	for _, c := range str {
 		if char, found := chars[c]; found {
 			fmt.Printf("%c", char)
