@@ -8,6 +8,9 @@
 
 ## ⓊⓈⒶⒼⒺ
 
+It converts regular text to bubble text.
+This text is copied to your clipboard for easy pasting.
+
 ```terminal
 bubgo BUBGO IS THE BEST
 ⒷⓊⒷⒼⓄ ⒾⓈ ⓉⒽⒺ ⒷⒺⓈⓉ
@@ -20,6 +23,10 @@ bubgo --shout bubgo is the best
 bubgo -s bubgo is the best
 ⒷⓊⒷⒼⓄ ⒾⓈ ⓉⒽⒺ ⒷⒺⓈⓉ
 ```
+
+*Notes:*
++ Copy to clipboard is currently only supported on Linux.
++ `xclip` is used to copy to clipboard.
 
 ## Contributing
 
