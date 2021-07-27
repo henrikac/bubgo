@@ -1,6 +1,8 @@
 package main
 
 import (
+	"errors"
+	"flag"
 	"fmt"
 	"os"
 	"strings"
@@ -71,12 +73,43 @@ var chars = map[rune]rune{
 	'9': '⑨',
 }
 
+type shout []string
+
+func (s *shout) String() string {
+	return fmt.Sprint(*s)
+}
+
+func (s *shout) Set(value string) error {
+	if len(*s) > 0 {
+		return errors.New("shout flag already set")
+	}
+	words := append([]string{value}, flag.Args()...)
+	for _, word := range words {
+		*s = append(*s, strings.ToUpper(word))
+	}
+	return nil
+}
+
+var shoutFlag shout
+
+func init() {
+	const usage = "transforms text to uppercase text: %s <words to shout>"
+	flag.Var(&shoutFlag, "shout", fmt.Sprintf(usage, "--shout"))
+	flag.Var(&shoutFlag, "s", fmt.Sprintf(usage, "-s"))
+}
+
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Usage: bubgo \"your text here\"")
 		os.Exit(1)
 	}
-	str := strings.Join(os.Args[1:], " ")
+	flag.Parse()
+	var str string
+	if len(shoutFlag) > 0 {
+		str = strings.Join(shoutFlag, " ")
+	} else {
+		str = strings.Join(os.Args[1:], " ")
+	}
 	for _, c := range str {
 		if char, found := chars[c]; found {
 			fmt.Printf("%c", char)
