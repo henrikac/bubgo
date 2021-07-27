@@ -25,8 +25,8 @@ bubgo -s bubgo is the best
 ```
 
 *Notes:*
-+ Copy to clipboard is currently only supported on Linux.
-+ `xclip` is used to copy to clipboard.
++ `pbcopy` is used to copy to clipboard on macOS.
++ `xclip` is used to copy to clipboard on linux.
 
 ## Contributing
 
