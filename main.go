@@ -3,7 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io"
 	"os"
+	"os/exec"
+	"runtime"
 	"strings"
 )
 
@@ -27,12 +30,49 @@ func main() {
 	} else {
 		str = strings.Join(os.Args[1:], " ")
 	}
+	bubbles := ""
 	for _, c := range str {
 		if char, found := chars[c]; found {
-			fmt.Printf("%c", char)
+			bubbles += string(char)
 			continue
 		}
-		fmt.Printf("%s", string(c))
+		bubbles += string(c)
 	}
-	fmt.Printf("\n")
+	fmt.Printf("%s\n", bubbles)
+
+	if runtime.GOOS == "linux" {
+		copyToClipboard(bubbles)
+	}
+}
+
+func copyToClipboard(s string) error {
+	_, err := exec.LookPath("xclip")
+	if err != nil {
+		return err
+	}
+	c1 := exec.Command("printf", s)
+	c2 := exec.Command("xclip", "-sel", "clip")
+
+	r, w := io.Pipe()
+	c1.Stdout = w
+	c2.Stdin = r
+
+	err = c1.Start()
+	if err != nil {
+		return err
+	}
+	err = c2.Start()
+	if err != nil {
+		return err
+	}
+	err = c1.Wait()
+	if err != nil {
+		return err
+	}
+	w.Close()
+	err = c2.Wait()
+	if err != nil {
+		return err
+	}
+	return nil
 }
