@@ -13,6 +13,14 @@ bubgo BUBGO IS THE BEST
 ⒷⓊⒷⒼⓄ ⒾⓈ ⓉⒽⒺ ⒷⒺⓈⓉ
 ```
 
+```terminal
+bubgo --shout bubgo is the best
+ⒷⓊⒷⒼⓄ ⒾⓈ ⓉⒽⒺ ⒷⒺⓈⓉ
+
+bubgo -s bubgo is the best
+ⒷⓊⒷⒼⓄ ⒾⓈ ⓉⒽⒺ ⒷⒺⓈⓉ
+```
+
 ## Contributing
 
 1. Fork it (<https://github.com/henrikac/bubgo/fork>)
