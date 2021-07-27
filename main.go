@@ -40,39 +40,49 @@ func main() {
 	}
 	fmt.Printf("%s\n", bubbles)
 
-	if runtime.GOOS == "linux" {
-		copyToClipboard(bubbles)
-	}
+	copyToClipboard(bubbles)
 }
 
 func copyToClipboard(s string) error {
-	_, err := exec.LookPath("xclip")
-	if err != nil {
-		return err
+	var c1 *exec.Cmd
+	var c2 *exec.Cmd
+	switch runtime.GOOS {
+	case "windows":
+		_, err := exec.LookPath("clip.exe")
+		if err != nil {
+			return err
+		}
+		c1 = exec.Command("echo", s)
+		c2 = exec.Command("clip.exe")
+	case "darwin":
+		_, err := exec.LookPath("pbcopy")
+		if err != nil {
+			return err
+		}
+		c1 = exec.Command("printf", s)
+		c2 = exec.Command("pbcopy")
+	default: // linux
+		_, err := exec.LookPath("xclip")
+		if err != nil {
+			return err
+		}
+		c1 = exec.Command("printf", s)
+		c2 = exec.Command("xclip", "-sel", "clip")
 	}
-	c1 := exec.Command("printf", s)
-	c2 := exec.Command("xclip", "-sel", "clip")
 
 	r, w := io.Pipe()
 	c1.Stdout = w
 	c2.Stdin = r
 
-	err = c1.Start()
-	if err != nil {
+	if err := c1.Start(); err != nil {
 		return err
 	}
-	err = c2.Start()
-	if err != nil {
+	if err := c2.Start(); err != nil {
 		return err
 	}
-	err = c1.Wait()
-	if err != nil {
+	if err := c1.Wait(); err != nil {
 		return err
 	}
 	w.Close()
-	err = c2.Wait()
-	if err != nil {
-		return err
-	}
-	return nil
+	return c2.Wait()
 }
